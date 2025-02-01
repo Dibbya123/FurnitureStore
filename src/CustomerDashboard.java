@@ -1,10 +1,14 @@
 
 import javax.swing.*;
+import java.util.*;
+import java.io.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+//import java.io.File;
+//import java.util.ArrayList;
+//import java.util.Scanner;
 
 public class CustomerDashboard extends JFrame {
     private JTable furnitureTable;
@@ -46,14 +50,44 @@ public class CustomerDashboard extends JFrame {
     }
 
     private void loadItems() {
-        itemList.add(new Furniture(1, "Sofa", "Living Room", 199.99, 5, "Comfortable 3-seater sofa"));
-        itemList.add(new Furniture(2, "Dining Table", "Dining", 299.99, 3, "Wooden dining table with 4 chairs"));
+        File file2 = new File("furnitures.txt");
+        if (!file2.exists()) {
+            System.out.println("Error: furnitures.txt not found!");
+            return;
+        }
+        try (Scanner scan2 = new Scanner(file2)) {
+            scan2.useDelimiter("\\t|\\n");
 
-        tableModel.setRowCount(0);
-        for (Furniture item : itemList) {
-            tableModel.addRow(new Object[]{item.getId(), item.getName(), item.getCategory(), item.getPrice(), item.getQuantity(), item.getDescription()});
+            while (scan2.hasNextLine()) {
+                String line = scan2.nextLine();
+                System.out.println("Reading line: " + line);
+
+                Scanner lineScanner = new Scanner(line);
+                lineScanner.useDelimiter("\\t");
+
+                try {
+                    int itemId = lineScanner.nextInt();
+                    String itemName = lineScanner.next();
+                    String itemCategory = lineScanner.next();
+                    double itemPrice = lineScanner.nextDouble();
+                    int itemQuantity = lineScanner.nextInt();
+                    String itemDetails = lineScanner.next();
+
+                    itemList.add(new Furniture(itemId, itemName, itemCategory, itemPrice, itemQuantity, itemDetails));
+                    tableModel.addRow(new Object[]{itemId, itemName, itemCategory, itemPrice, itemQuantity, itemDetails});
+
+                } catch (Exception e) {
+                    System.out.println("Skipping invalid line: " + line);
+                    e.printStackTrace();
+                }
+                lineScanner.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Error loading items: " + e.getMessage());
         }
     }
+
+
 
     private void buyItem() {
         int selectedRow = furnitureTable.getSelectedRow();
@@ -79,7 +113,7 @@ public class CustomerDashboard extends JFrame {
         new Login();
     }
 
-    public static void main(String[] args) {
-        new CustomerDashboard();
-    }
+//    public static void main(String[] args) {
+//        new CustomerDashboard();
+//    }
 }

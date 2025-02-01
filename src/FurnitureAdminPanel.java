@@ -1,10 +1,14 @@
 
-
+import java.util.*;
+import java.io.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FurnitureAdminPanel extends JFrame {
@@ -84,17 +88,30 @@ public class FurnitureAdminPanel extends JFrame {
     private void addFurniture() {
         try {
             int id = itemList.size() + 1;
-            String name = nameField.getText();
-            String category = categoryField.getText();
-            double price = Double.parseDouble(priceField.getText());
-            int quantity = Integer.parseInt(quantityField.getText());
-            String description = descriptionArea.getText();
+            String name = nameField.getText().trim();
+            String category = categoryField.getText().trim();
+            double price = Double.parseDouble(priceField.getText().trim());
+            int quantity = Integer.parseInt(quantityField.getText().trim());
+            String description = descriptionArea.getText().trim();
 
             Furniture furniture = new Furniture(id, name, category, price, quantity, description);
             itemList.add(furniture);
 
+            File file1 = new File("furnitures.txt");
+            boolean fileExists = file1.exists();
+
+            try (FileWriter writer1 = new FileWriter(file1, true);
+                 BufferedWriter bufferedWriter = new BufferedWriter(writer1)) {
+
+                if (fileExists) {
+                    bufferedWriter.newLine();
+                }
+                bufferedWriter.write(id + "\t" + name + "\t" + category + "\t" + price + "\t" + quantity + "\t" + description);
+            }
+
             tableModel.addRow(new Object[]{id, name, category, price, quantity, description});
 
+            // Clear input fields
             nameField.setText("");
             categoryField.setText("");
             priceField.setText("");
@@ -105,6 +122,7 @@ public class FurnitureAdminPanel extends JFrame {
             JOptionPane.showMessageDialog(this, "Invalid input. Please check the values.");
         }
     }
+
 
     private void deleteFurniture() {
         int selectedRow = furnitureTable.getSelectedRow();
