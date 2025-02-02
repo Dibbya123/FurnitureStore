@@ -14,20 +14,20 @@ public class ButtonEditor extends AbstractCellEditor implements TableCellEditor 
         button = new JButton("Buy");
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {
-            @Override
+
             public void actionPerformed(ActionEvent e) {
-                fireEditingStopped(); // Stop editing and fire the event
+                fireEditingStopped();
                 JOptionPane.showMessageDialog(null, "Item Bought!");
             }
         });
     }
 
-    @Override
+
     public Object getCellEditorValue() {
         return button.getText();
     }
 
-    @Override
+
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         selectedRow = row;
         return button;

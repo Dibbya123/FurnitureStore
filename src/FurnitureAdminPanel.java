@@ -27,7 +27,7 @@ public class FurnitureAdminPanel extends JFrame {
 
         Font customFont = new Font("Arial", Font.BOLD, 14);
 
-        // Input Panel
+
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(6, 2, 10, 10));
 
@@ -63,12 +63,12 @@ public class FurnitureAdminPanel extends JFrame {
 
         add(inputPanel, BorderLayout.NORTH);
 
-        // Table for items
+
         tableModel = new DefaultTableModel(new String[]{"ID", "Name", "Category", "Price", "Quantity", "Description"}, 0);
         furnitureTable = new JTable(tableModel);
         add(new JScrollPane(furnitureTable), BorderLayout.CENTER);
 
-        // Buttons Panel
+
         JPanel buttonPanel = new JPanel();
         JButton deleteButton = new JButton("Delete Selected");
         JButton logoutButton = new JButton("Logout");
@@ -77,7 +77,7 @@ public class FurnitureAdminPanel extends JFrame {
         buttonPanel.add(logoutButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Event Listeners
+
         addButton.addActionListener(e -> addFurniture());
         deleteButton.addActionListener(e -> deleteFurniture());
         logoutButton.addActionListener(e -> logout());
@@ -111,7 +111,7 @@ public class FurnitureAdminPanel extends JFrame {
 
             tableModel.addRow(new Object[]{id, name, category, price, quantity, description});
 
-            // Clear input fields
+
             nameField.setText("");
             categoryField.setText("");
             priceField.setText("");

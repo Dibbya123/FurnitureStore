@@ -24,12 +24,12 @@ public class CustomerDashboard extends JFrame {
 
         Font customFont = new Font("Arial", Font.BOLD, 14);
 
-        // Table for items
+
         tableModel = new DefaultTableModel(new String[]{"ID", "Name", "Category", "Price", "Quantity", "Description"}, 0);
         furnitureTable = new JTable(tableModel);
         add(new JScrollPane(furnitureTable), BorderLayout.CENTER);
 
-        // Buttons Panel
+
         JPanel buttonPanel = new JPanel();
         JButton buyButton = new JButton("Buy");
         JButton cancelButton = new JButton("Cancel");
@@ -40,7 +40,7 @@ public class CustomerDashboard extends JFrame {
         buttonPanel.add(logoutButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Event Listeners
+
         buyButton.addActionListener(e -> buyItem());
         cancelButton.addActionListener(e -> cancelTransaction());
         logoutButton.addActionListener(e -> logout());

@@ -17,13 +17,13 @@ public class Login implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
-        // Title label
+
         JLabel titleLabel = new JLabel("Select Login Type", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         titleLabel.setBounds(150, 20, 300, 30);
         frame.add(titleLabel);
 
-        // Buttons for Admin and Customer login
+
         JButton adminButton = new JButton("Admin Login");
         adminButton.setBounds(200, 100, 200, 40);
         adminButton.addActionListener(e -> openLoginFrame("Admin"));
@@ -34,13 +34,13 @@ public class Login implements ActionListener {
         customerButton.addActionListener(e -> openLoginFrame("Customer"));
         frame.add(customerButton);
 
-        // Display the frame
+
         frame.setVisible(true);
     }
 
     private void openLoginFrame(String userType) {
         this.userType = userType;
-        frame.dispose(); // Close the main frame
+        frame.dispose();
 
 
         JFrame loginFrame = new JFrame(userType + " Login");
@@ -64,7 +64,7 @@ public class Login implements ActionListener {
         usernameField.setBounds(200, 100, 200, 30);
         loginFrame.add(usernameField);
 
-        // Password label and password field
+
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setBounds(100, 150, 100, 30);
         loginFrame.add(passwordLabel);
@@ -73,22 +73,22 @@ public class Login implements ActionListener {
         passwordField.setBounds(200, 150, 200, 30);
         loginFrame.add(passwordField);
 
-        // Login button
+
         JButton loginButton = new JButton("Login");
         loginButton.setBounds(250, 220, 100, 40);
         loginButton.addActionListener(this);
         loginFrame.add(loginButton);
 
-        // Display the login frame
+
         loginFrame.setVisible(true);
     }
 
-    @Override
+
     public void actionPerformed(ActionEvent e) {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
 
-        // Hardcoded credentials for simplicity
+
         if (userType.equals("Admin")) {
             if (username.equals("Admin") && password.equals("Admin123")) {
                 JOptionPane.showMessageDialog(null, "Welcome Admin!");
