@@ -7,7 +7,7 @@ public class Login implements ActionListener {
     private JFrame frame;
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private String userType; // Determines if the user is Admin or Customer
+    private String userType;
 
     public Login() {
         // Setup the main login frame
@@ -42,20 +42,20 @@ public class Login implements ActionListener {
         this.userType = userType;
         frame.dispose(); // Close the main frame
 
-        // Create a new frame for login
+
         JFrame loginFrame = new JFrame(userType + " Login");
         loginFrame.setSize(600, 400);
         loginFrame.setLayout(null);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setLocationRelativeTo(null);
 
-        // Title label
+
         JLabel titleLabel = new JLabel(userType + " Login", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         titleLabel.setBounds(150, 20, 300, 30);
         loginFrame.add(titleLabel);
 
-        // Username label and text field
+
         JLabel usernameLabel = new JLabel("Username:");
         usernameLabel.setBounds(100, 100, 100, 30);
         loginFrame.add(usernameLabel);
@@ -107,11 +107,11 @@ public class Login implements ActionListener {
     }
 
     private void openAdminFrame() {
-        new FurnitureAdminPanel(); // Open Admin Dashboard
+        new FurnitureAdminPanel();
     }
 
     private void openCustomerFrame() {
-        new CustomerDashboard(); // Open Customer Dashboard
+        new CustomerDashboard();
     }
 
 
